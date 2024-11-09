@@ -1,0 +1,14 @@
+---
+- name: Restart service openvpn-client@{{ openvpn_profile }}
+  ansible.builtin.systemd_service:
+    name: 'openvpn-client@{{ openvpn_profile }}.service'
+    daemon-reload: true
+    state: restarted
+  ignore_errors: '{{ ansible_check_mode }}'
+
+- name: Restart service openvpn-server@{{ openvpn_profile }}
+  ansible.builtin.systemd_service:
+    name: 'openvpn-server@{{ openvpn_profile }}.service'
+    daemon-reload: true
+    state: restarted
+  ignore_errors: '{{ ansible_check_mode }}'

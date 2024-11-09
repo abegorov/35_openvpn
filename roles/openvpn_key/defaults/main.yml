@@ -1,0 +1,3 @@
+---
+openvpn_key_local_path: 'passwords/static.key'
+openvpn_key_remote_path: /etc/openvpn/static.key

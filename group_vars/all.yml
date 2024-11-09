@@ -1,0 +1,12 @@
+---
+tls_ca_cn: OpenVPN ROOT CA
+tls_ca_key: passwords/ca.key
+tls_ca_cert: passwords/ca.crt
+tls_ca_remote_path: /etc/openvpn/ca.crt
+tls_cert_ca_key: '{{ tls_ca_key }}'
+tls_cert_ca_cert: '{{ tls_ca_cert }}'
+tls_cert_cn: '{{ inventory_hostname }}'
+tls_cert_san: ['DNS:{{ inventory_hostname }}']
+tls_cert_key: '{{ undef() }}'
+tls_cert_cert: '{{ undef() }}'
+tls_cert_not_after: '+365d'

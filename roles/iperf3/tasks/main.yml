@@ -1,0 +1,4 @@
+- name: Install iperf3 package
+  ansible.builtin.dnf:
+    name: iperf3
+    state: present

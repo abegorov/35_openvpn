@@ -1,0 +1,47 @@
+---
+openvpn_profile: '{{ undef() }}'
+openvpn_profile_type: '{{ undef() }}'
+
+openvpn_server_tap_port: 1194
+openvpn_server_tap_proto: udp
+openvpn_server_tap_ip: '{{ undef() }}'
+openvpn_server_tap_mask: '255.255.255.0'
+openvpn_server_tap_key: /etc/openvpn/static.key
+
+openvpn_client_tap_remote: '{{ undef() }}'
+openvpn_client_tap_port: '{{ openvpn_server_tap_port }}'
+openvpn_client_tap_proto: '{{ openvpn_server_tap_proto }}'
+openvpn_client_tap_ip: '{{ undef() }}'
+openvpn_client_tap_mask: '{{ openvpn_server_tap_mask }}'
+openvpn_client_tap_key: '{{ openvpn_server_tap_key }}'
+
+openvpn_server_tun_port: 1194
+openvpn_server_tun_proto: udp
+openvpn_server_tun_ip: '{{ undef() }}'
+openvpn_server_tun_mask: '255.255.255.0'
+openvpn_server_tun_key: /etc/openvpn/static.key
+
+openvpn_client_tun_remote: '{{ undef() }}'
+openvpn_client_tun_port: '{{ openvpn_server_tun_port }}'
+openvpn_client_tun_proto: '{{ openvpn_server_tun_proto }}'
+openvpn_client_tun_ip: '{{ undef() }}'
+openvpn_client_tun_mask: '{{ openvpn_server_tun_mask }}'
+openvpn_client_tun_key: '{{ openvpn_server_tun_key }}'
+
+openvpn_server_ras_port: 1194
+openvpn_server_ras_proto: udp
+openvpn_server_ras_ca: '{{ undef() }}'
+openvpn_server_ras_cert: '{{ undef() }}'
+openvpn_server_ras_key: '{{ undef() }}'
+openvpn_server_ras_dh: '{{ undef() }}'
+openvpn_server_ras_ip: '{{ undef() }}'
+openvpn_server_ras_mask: '255.255.255.0'
+openvpn_server_ras_pool_file: ipp.txt
+openvpn_server_ras_client_config_dir: /etc/openvpn/client
+
+openvpn_client_ras_remote: '{{ undef() }}'
+openvpn_client_ras_port: '{{ openvpn_server_ras_port }}'
+openvpn_client_ras_proto: '{{ openvpn_server_ras_proto }}'
+openvpn_client_ras_ca: '{{ undef() }}'
+openvpn_client_ras_cert: '{{ undef() }}'
+openvpn_client_ras_key: '{{ undef() }}'

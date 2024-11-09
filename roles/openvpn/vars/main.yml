@@ -1,0 +1,2 @@
+---
+openvpn_service_name: openvpn-{{ openvpn_profile_type }}@{{ openvpn_profile }}

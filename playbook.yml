@@ -1,0 +1,36 @@
+---
+- name: Common provision
+  hosts: all
+  become: true
+  gather_facts: false
+  roles:
+    - epel_release
+    - iperf3
+    - openvpn_key
+    - tls_ca
+    - tls_cert
+
+- name: Server provision
+  hosts: server
+  become: true
+  gather_facts: false
+  roles:
+    - role: dhparams
+    - role: openvpn
+      openvpn_profile: tap
+    - role: openvpn
+      openvpn_profile: tun
+    - role: openvpn
+      openvpn_profile: ras
+
+- name: Client provision
+  hosts: client
+  become: true
+  gather_facts: false
+  roles:
+    - role: openvpn
+      openvpn_profile: tap
+    - role: openvpn
+      openvpn_profile: tun
+    - role: openvpn
+      openvpn_profile: ras

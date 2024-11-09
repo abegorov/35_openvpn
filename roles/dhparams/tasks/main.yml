@@ -1,0 +1,8 @@
+---
+- name: Generate Diffie-Hellman parameters
+  community.crypto.openssl_dhparam:
+    path: '{{ dhparams_path }}'
+    size: '{{ dhparams_size }}'
+    owner: '{{ dhparams_owner }}'
+    group: '{{ dhparams_group }}'
+    mode: '{{ dhparams_mode }}'

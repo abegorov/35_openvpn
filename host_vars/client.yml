@@ -1,0 +1,32 @@
+---
+ip: 192.168.56.20
+
+openvpn_key_remote_path: /etc/openvpn/static.key
+tls_cert_key: /etc/openvpn/client.key
+tls_cert_cert: /etc/openvpn/client.crt
+tls_cert_usage_critical: true
+tls_cert_ext_usage: [clientAuth]
+tls_cert_ext_usage_critical: true
+
+openvpn_profile_type: client
+
+openvpn_client_tap_remote: '{{ hostvars["server"].ip }}'
+openvpn_client_tap_port: '{{ hostvars["server"].openvpn_server_tap_port }}'
+openvpn_client_tap_proto: '{{ hostvars["server"].openvpn_server_tap_proto }}'
+openvpn_client_tap_ip: '10.10.10.2'
+openvpn_client_tap_mask: '{{ hostvars["server"].openvpn_server_tap_mask }}'
+openvpn_client_tap_key: '{{ openvpn_key_remote_path }}'
+
+openvpn_client_tun_remote: '{{ hostvars["server"].ip }}'
+openvpn_client_tun_port: '{{ hostvars["server"].openvpn_server_tun_port }}'
+openvpn_client_tun_proto: '{{ hostvars["server"].openvpn_server_tun_proto }}'
+openvpn_client_tun_ip: '10.10.11.2'
+openvpn_client_tun_mask: '{{ hostvars["server"].openvpn_server_tun_mask }}'
+openvpn_client_tun_key: '{{ openvpn_key_remote_path }}'
+
+openvpn_client_ras_remote: '{{ hostvars["server"].ip }}'
+openvpn_client_ras_port: '{{ hostvars["server"].openvpn_server_ras_port }}'
+openvpn_client_ras_proto: '{{ hostvars["server"].openvpn_server_ras_proto }}'
+openvpn_client_ras_ca: '{{ tls_ca_remote_path }}'
+openvpn_client_ras_cert: '{{ tls_cert_cert }}'
+openvpn_client_ras_key: '{{ tls_cert_key }}'

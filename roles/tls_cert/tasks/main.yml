@@ -1,0 +1,37 @@
+---
+- name: Install python3-cryptography
+  ansible.builtin.dnf:
+    name: python3-cryptography
+    state: present
+
+- name: Create host private key
+  community.crypto.openssl_privatekey:
+    path: '{{ tls_cert_key }}'
+  no_log: true
+
+- name: Create host certificate signing request (CSR)
+  community.crypto.openssl_csr_pipe:
+    common_name: '{{ tls_cert_cn }}'
+    subject_alt_name: '{{ tls_cert_san }}'
+    use_common_name_for_san: false
+    key_usage: '{{ tls_cert_usage }}'
+    key_usage_critical: '{{ tls_cert_usage_critical }}'
+    extended_key_usage: '{{ tls_cert_ext_usage }}'
+    extended_key_usage_critical: '{{ tls_cert_ext_usage_critical }}'
+    privatekey_path: '{{ tls_cert_key }}'
+  no_log: true
+  changed_when: false
+  register: csr
+
+- name: Create host certificate from CSR
+  community.crypto.x509_certificate:
+    path: '{{ tls_cert_cert }}'
+    csr_content: '{{ csr.csr }}'
+    provider: ownca
+    ownca_content: '{{ lookup("ansible.builtin.file",
+      playbook_dir + "/" + tls_cert_ca_cert) }}'
+    ownca_privatekey_content: '{{ lookup("ansible.builtin.file",
+      playbook_dir + "/" + tls_cert_ca_key) }}'
+    ownca_not_after: '{{ tls_cert_not_after }}'
+    ownca_not_before: '-1d'
+  no_log: true

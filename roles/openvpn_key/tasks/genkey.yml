@@ -1,0 +1,12 @@
+---
+- name: Create openvpn secret key
+  ansible.builtin.command:
+    cmd: /usr/sbin/openvpn --genkey secret '{{ openvpn_key_remote_path }}'
+    creates: '{{ openvpn_key_remote_path }}'
+
+- name: Download openvpn secret key
+  ansible.builtin.fetch:
+    src: '{{ openvpn_key_remote_path }}'
+    dest: '{{ playbook_dir }}/{{ openvpn_key_local_path }}'
+    flat: true
+  no_log: true

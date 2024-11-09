@@ -1,0 +1,35 @@
+---
+ip: 192.168.56.10
+
+openvpn_key_remote_path: /etc/openvpn/static.key
+dhparams_path: /etc/openvpn/dh.pem
+tls_cert_key: /etc/openvpn/server.key
+tls_cert_cert: /etc/openvpn/server.crt
+tls_cert_usage_critical: true
+tls_cert_ext_usage: [serverAuth]
+tls_cert_ext_usage_critical: true
+
+openvpn_profile_type: server
+
+openvpn_server_tap_port: 1194
+openvpn_server_tap_proto: udp
+openvpn_server_tap_ip: '10.10.10.1'
+openvpn_server_tap_mask: '255.255.255.0'
+openvpn_server_tap_key: '{{ openvpn_key_remote_path }}'
+
+openvpn_server_tun_port: 1195
+openvpn_server_tun_proto: udp
+openvpn_server_tun_ip: '10.10.11.1'
+openvpn_server_tun_mask: '255.255.255.0'
+openvpn_server_tun_key: '{{ openvpn_key_remote_path }}'
+
+openvpn_server_ras_port: 1207
+openvpn_server_ras_proto: udp
+openvpn_server_ras_ca: '{{ tls_ca_remote_path }}'
+openvpn_server_ras_cert: '{{ tls_cert_cert }}'
+openvpn_server_ras_key: '{{ tls_cert_key }}'
+openvpn_server_ras_dh: '{{ dhparams_path }}'
+openvpn_server_ras_ip: '10.10.12.0'
+openvpn_server_ras_mask: '255.255.255.0'
+openvpn_server_ras_pool_file: ipp.txt
+openvpn_server_ras_client_config_dir: /etc/openvpn/client

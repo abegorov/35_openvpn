@@ -1,0 +1,12 @@
+---
+tls_cert_ca_key: '{{ playbook_dir }}/passwords/ca.key'
+tls_cert_ca_cert: '{{ playbook_dir }}/passwords/ca.crt'
+tls_cert_cn: '{{ inventory_hostname }}'
+tls_cert_san: ['DNS:{{ inventory_hostname }}']
+tls_cert_key: '{{ undef() }}'
+tls_cert_cert: '{{ undef() }}'
+tls_cert_not_after: '+365d'
+tls_cert_usage: [digitalSignature, keyEncipherment, keyAgreement]
+tls_cert_usage_critial: false
+tls_cert_ext_usage: [clientAuth, serverAuth]
+tls_cert_ext_usage_critical: false

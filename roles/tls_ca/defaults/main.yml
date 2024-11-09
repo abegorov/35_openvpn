@@ -1,0 +1,5 @@
+---
+tls_ca_cn: DEFAULT ROOT CA
+tls_ca_key: '{{ playbook_dir }}/passwords/ca.key'
+tls_ca_cert: '{{ playbook_dir }}/passwords/ca.crt'
+tls_ca_remote_path:

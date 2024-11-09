@@ -1,0 +1,46 @@
+---
+- name: Create private key for CA
+  delegate_to: localhost
+  become: false
+  run_once: true
+  community.crypto.openssl_privatekey:
+    path: '{{ playbook_dir }}/{{ tls_ca_key }}'
+  no_log: true
+
+- name: Create certificate signing request (CSR) for CA certificate
+  delegate_to: localhost
+  become: false
+  run_once: true
+  community.crypto.openssl_csr_pipe:
+    common_name: '{{ tls_ca_cn }}'
+    use_common_name_for_san: false
+    basic_constraints: ['CA:TRUE']
+    basic_constraints_critical: true
+    key_usage: [keyCertSign]
+    key_usage_critical: true
+    privatekey_path: '{{ playbook_dir }}/{{ tls_ca_key }}'
+  no_log: true
+  changed_when: false
+  register: ca_csr
+
+- name: Create self-signed CA certificate from CSR
+  delegate_to: localhost
+  become: false
+  run_once: true
+  community.crypto.x509_certificate:
+    path: '{{ playbook_dir }}/{{ tls_ca_cert }}'
+    csr_content: "{{ ca_csr.csr }}"
+    privatekey_path: '{{ playbook_dir }}/{{ tls_ca_key }}'
+    provider: selfsigned
+    selfsigned_not_after: '+10957d'
+  no_log: true
+
+- name: Copy CA certificate
+  ansible.builtin.copy:
+    src: '{{ playbook_dir }}/{{ tls_ca_cert }}'
+    dest: '{{ tls_ca_remote_path }}'
+    owner: root
+    group: root
+    mode: '0644'
+  diff: false
+  when: tls_ca_remote_path

@@ -1,0 +1,6 @@
+---
+dhparams_path: '{{ undef() }}'
+dhparams_owner: root
+dhparams_group: root
+dhparams_mode: '0644'
+dhparams_size: 2048
