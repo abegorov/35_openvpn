@@ -22,6 +22,7 @@
       openvpn_profile: tun
     - role: openvpn
       openvpn_profile: ras
+    - role: ocserv
 
 - name: Client provision
   hosts: client
@@ -34,3 +35,4 @@
       openvpn_profile: tun
     - role: openvpn
       openvpn_profile: ras
+    - role: openconnect
