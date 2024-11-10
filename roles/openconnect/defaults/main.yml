@@ -1,0 +1,8 @@
+---
+openconnect_profile: default
+
+openconnect_server: '{{ undef() }}'
+
+openconnect_ca_cert: /etc/openconnect/ca.crt
+openconnect_cert: /etc/openconnect/{{ inventory_hostname }}.crt
+openconnect_key: /etc/openconnect/{{ inventory_hostname }}.key

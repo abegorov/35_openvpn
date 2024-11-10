@@ -1,0 +1,18 @@
+[Unit]
+Description=OpenConnect tunnel for {{ openconnect_profile }} profile
+After=syslog.target network-online.target
+Wants=network-online.target
+Documentation=man:openconnect(8)
+
+[Service]
+Type=exec
+PrivateTmp=true
+WorkingDirectory=/etc/openconnect
+ExecStart=/usr/sbin/openconnect --config '{{ openconnect_profile }}.conf'
+DeviceAllow=/dev/null rw
+DeviceAllow=/dev/net/tun rw
+ProtectSystem=true
+ProtectHome=true
+
+[Install]
+WantedBy=multi-user.target
