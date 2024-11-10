@@ -4,3 +4,4 @@ ocserv_cert: /etc/ocserv/{{ inventory_hostname }}.crt
 ocserv_key: /etc/ocserv/{{ inventory_hostname }}.key
 ocserv_dh: /etc/ocserv/dh.pem
 ocserv_network: '{{ undef() }}'
+ocserv_netmask: '{{ undef() }}'
