@@ -1,0 +1,42 @@
+---
+- name: Install openconnect server
+  ansible.builtin.dnf:
+    name: ocserv
+    state: present
+
+- name: Generate ocserv CA certificate
+  ansible.builtin.include_role:
+    name: tls_ca
+  vars:
+    tls_ca_remote_path: '{{ ocserv_ca_cert }}'
+
+- name: Generate ocserv certificate and key
+  ansible.builtin.include_role:
+    name: tls_cert
+  vars:
+    tls_cert_cert: '{{ ocserv_cert }}'
+    tls_cert_key: '{{ ocserv_key }}'
+
+- name: Generate ocserv dh params
+  ansible.builtin.include_role:
+    name: dhparams
+  vars:
+    dhparams_path: '{{ ocserv_dh }}'
+
+- name: Update ocserv configuration
+  ansible.builtin.template:
+    src: ocserv.conf
+    dest: /etc/ocserv/ocserv.conf
+    owner: root
+    group: root
+    mode: '0644'
+  notify: Reload service ocserv
+
+
+- name: Enable and start service ocserv
+  ansible.builtin.systemd_service:
+    name: ocserv.service
+    daemon-reload: true
+    enabled: true
+    state: started
+  ignore_errors: '{{ ansible_check_mode }}'
