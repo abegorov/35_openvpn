@@ -7,6 +7,6 @@ tls_cert_ca_key: '{{ tls_ca_key }}'
 tls_cert_ca_cert: '{{ tls_ca_cert }}'
 tls_cert_cn: '{{ inventory_hostname }}'
 tls_cert_san: ['DNS:{{ inventory_hostname }}']
-tls_cert_key: '{{ undef() }}'
-tls_cert_cert: '{{ undef() }}'
+tls_cert_key: /etc/openvpn/{{ inventory_hostname }}.key
+tls_cert_cert: /etc/openvpn/{{ inventory_hostname }}.crt
 tls_cert_not_after: '+365d'

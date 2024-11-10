@@ -2,8 +2,6 @@
 ip: 192.168.56.20
 
 openvpn_key_remote_path: /etc/openvpn/static.key
-tls_cert_key: /etc/openvpn/client.key
-tls_cert_cert: /etc/openvpn/client.crt
 tls_cert_usage_critical: true
 tls_cert_ext_usage: [clientAuth]
 tls_cert_ext_usage_critical: true

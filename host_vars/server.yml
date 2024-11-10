@@ -3,8 +3,6 @@ ip: 192.168.56.10
 
 openvpn_key_remote_path: /etc/openvpn/static.key
 dhparams_path: /etc/openvpn/dh.pem
-tls_cert_key: /etc/openvpn/server.key
-tls_cert_cert: /etc/openvpn/server.crt
 tls_cert_usage_critical: true
 tls_cert_ext_usage: [serverAuth]
 tls_cert_ext_usage_critical: true
@@ -37,4 +35,5 @@ openvpn_server_ras_mask: '255.255.255.0'
 openvpn_server_ras_pool_file: ipp.txt
 openvpn_server_ras_client_config_dir: /etc/openvpn/client
 
-ocserv_network: '10.10.13.0/24'
+ocserv_network: '10.10.13.0'
+ocserv_netmask: '255.255.255.0'
