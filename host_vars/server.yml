@@ -8,6 +8,9 @@ tls_cert_cert: /etc/openvpn/server.crt
 tls_cert_usage_critical: true
 tls_cert_ext_usage: [serverAuth]
 tls_cert_ext_usage_critical: true
+tls_cert_san:
+  - DNS:{{ inventory_hostname }}
+  - IP:{{ ip }}
 
 openvpn_profile_type: server
 
@@ -33,3 +36,5 @@ openvpn_server_ras_ip: '10.10.12.0'
 openvpn_server_ras_mask: '255.255.255.0'
 openvpn_server_ras_pool_file: ipp.txt
 openvpn_server_ras_client_config_dir: /etc/openvpn/client
+
+ocserv_network: '10.10.13.0/24'

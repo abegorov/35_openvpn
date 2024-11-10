@@ -7,6 +7,9 @@ tls_cert_cert: /etc/openvpn/client.crt
 tls_cert_usage_critical: true
 tls_cert_ext_usage: [clientAuth]
 tls_cert_ext_usage_critical: true
+tls_cert_san:
+  - DNS:{{ inventory_hostname }}
+  - IP:{{ ip }}
 
 openvpn_profile_type: client
 
@@ -30,3 +33,5 @@ openvpn_client_ras_proto: '{{ hostvars["server"].openvpn_server_ras_proto }}'
 openvpn_client_ras_ca: '{{ tls_ca_remote_path }}'
 openvpn_client_ras_cert: '{{ tls_cert_cert }}'
 openvpn_client_ras_key: '{{ tls_cert_key }}'
+
+openconnect_server: '{{ hostvars["server"].ip }}'
