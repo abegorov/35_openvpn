@@ -1,4 +1,4 @@
-- name: Install required packages
+- name: Install openvpn and policycoreutils packages
   ansible.builtin.dnf:
     name:
       - openvpn
